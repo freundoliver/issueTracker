@@ -1,0 +1,631 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+
+    <title>Tracker Application</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+  </head>
+
+
+  <body>
+
+    <div class="header">
+
+      <h1> Issue Tracker </h1>
+
+    </div>
+
+
+    <div class="insert">
+      <!-- part for creating a new task -->
+      <form>
+        <div class="insert-element-description">
+          Task Name:<br>
+          <input type="text" name="name" size="80"><br>
+        </div>
+        <div class="insert-element-date">
+          Due-Date:<br>
+          <input type="text" name="date" size="13"><br>
+        </div>
+        <div class="insert-element-button">
+          <input type="submit" value="Add Task!">
+        </div>
+      </form>
+    </div>
+
+
+    <div class="todo-list">
+      <!-- part for viewing the tasks -->
+
+      <!-- THIS IS THE HEADER, DO NOT DELETE! -->
+      <div class="todo-list-element-hdr">
+        <div class="todo-list-element-checkbox-hdr">
+          <b>Done</b>
+        </div>
+        <div class="todo-list-element-description-hdr">
+          <b>Description</b>
+        </div>
+        <div class="todo-list-element-delete-hdr">
+         <b>Delete</b>
+        </div>
+        <div class="todo-list-element-date-hdr">
+          <b>Due Date</b>
+        </div>
+      </div>
+
+      <!-- TEST entry 01 -->
+      <!-- DO NOT DELETE, leave as example for Jquery structure -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Coiffeur 10 Uhr
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          17.03.2016
+        </div>
+      </div>
+
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Wichtiger Auftrag für Geschäft
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done" checked "on">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          <strike>Lorem Ipsum dolor sit amet</strike>
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          <strike>16.03.2016</strike>
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+      <!-- TEST entry 02 - n -->
+      <div class="todo-list-element">
+        <div class="todo-list-element-checkbox">
+          <form>
+            <input type="checkbox" name "done">
+          </form>
+        </div>
+        <div class="todo-list-element-description">
+          Lorem Ipsum dolor sit amet
+        </div>
+        <div class="todo-list-element-delete">
+          <img src="res/delete.png" alt="Delete item">
+        </div>
+        <div class="todo-list-element-date">
+          16.03.2016
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+
+
+
+  </body>
+</html>
