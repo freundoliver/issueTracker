@@ -1,11 +1,24 @@
 /*--------------------------------------*/
+/* -- formatting of the whole body  -- */
+/*--------------------------------------*/
+.body {
+  background-image: url("res/background.png");
+
+}
+
+
+
+/*--------------------------------------*/
 /* -- Middle Block: Insert new todo  -- */
 /*--------------------------------------*/
 .header {
   overflow: auto;
   text-align:center;
 
-  background-color: #CEE3F6;
+  border-radius: 15px;
+  box-shadow: 10px 10px 5px #888888;
+
+  background: linear-gradient(#e4856f, #d1603e);
 
   height:6em;
   width: 50em;
@@ -13,6 +26,8 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 1.5em;
+
+  padding-top: 0.7em;
 
 }
 
@@ -23,7 +38,10 @@
   overflow: auto;
   text-align:left;
 
-  background-color: #CEE3F6;
+  border-radius: 15px;
+
+  background: linear-gradient(#e4856f, #d1603e);
+  box-shadow: 10px 10px 5px #888888;
 
   height:5em;
   width: 50em;
@@ -72,7 +90,10 @@
 .todo-list {
   overflow: auto;
 
-  background-color: #CEE3F6;
+  border-radius: 15px;
+
+  background: linear-gradient(#e4856f, #d1603e);
+  box-shadow: 10px 10px 5px #888888;
 
   height:30em;
   max-height: 30em;
@@ -80,6 +101,16 @@
 
   margin-left: auto;
   margin-right: auto;
+
+}
+
+/*--------------------------------------*/
+/* -- Contains the TODOs without HDR -- */
+/*--------------------------------------*/
+.todo-list-content {
+  overflow: auto;
+
+  max-height: 27.5em;
 
 }
 
@@ -139,6 +170,24 @@
 
   float:right;
   clear:right;
+}
+
+/*--------------------------------------*/
+/* -- For showing an individual todo -- */
+/*--------------------------------------*/
+.todo-list-element-hdr {
+  overflow: auto;
+  /* make div not scrollable */
+  overflow-y: hidden;
+
+  text-align:center;
+
+  padding-top: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+
+  border-bottom-style: dotted;
 }
 
 /*-----------------------------------*/
