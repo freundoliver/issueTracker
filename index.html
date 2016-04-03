@@ -6,14 +6,32 @@
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
+    <link rel="icon" href="res/icon.png">
+
   </head>
 
 
   <body class="body">
 
     <div class="header">
+      <!-- contains the title image -->
 
-  
+
+    </div>
+
+    <div class="navigation">
+
+      <div class="navigationHome">
+        <a href="index.html" class="a"> <b> Home </b> </a>
+      </div>
+
+      <div class="navigationAbout">
+        <a href="about.html" class="a"> About </a>
+      </div>
+
+      <div class="navigationContact">
+        <a href="contact.html" class="a"> Contact </a>
+      </div>
 
     </div>
 
@@ -21,13 +39,23 @@
     <div class="insert">
       <!-- part for creating a new task -->
       <form>
+        <!-- first line -->
         <div class="insert-element-description">
           <b>Task Name</b></br>
-          <input type="text" name="name" size="80" class="insert-element-description-text"><br>
+          <input type="text" name="name" size="100" class="insert-element-description-text"><br>
         </div>
         <div class="insert-element-date">
           <b>Due-Date</b></br>
           <input type="text" name="date" size="13" class="insert-element-date-text"><br>
+        </div>
+        <!--second line -->
+        <div class="insert-element-prio-text">
+          <b>Prio</b></br>
+          <select class="insert-element-prio"> name="Prio" size="3"
+            <option>1 - High</option>
+            <option>2 - Medium</option>
+            <option>3 - Low</option>
+          </select>
         </div>
         <div class="insert-element-button">
           <input type="submit" value="Add Task!">
@@ -44,15 +72,23 @@
         <div class="todo-list-element-checkbox-hdr">
           <b>Done</b>
         </div>
+
         <div class="todo-list-element-description-hdr">
           <b>Description</b>
         </div>
+
         <div class="todo-list-element-delete-hdr">
          <b>Delete</b>
         </div>
+
         <div class="todo-list-element-date-hdr">
           <b>Due Date</b>
         </div>
+
+        <div class="todo-list-element-prio-hdr">
+          <b>Prio</b>
+        </div>
+
       </div>
 
       <div class="todo-list-content">
@@ -73,6 +109,9 @@
           <div class="todo-list-element-date">
             17.03.2016
           </div>
+          <div class="todo-list-element-prio">
+            1
+          </div>
         </div>
 
           <!-- TEST entry 02 - n -->
@@ -91,23 +130,8 @@
             <div class="todo-list-element-date">
               17.03.2016
             </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
+            <div class="todo-list-element-prio">
+              1
             </div>
           </div>
 
@@ -127,23 +151,8 @@
             <div class="todo-list-element-date">
               17.03.2016
             </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
+            <div class="todo-list-element-prio">
+              1
             </div>
           </div>
 
@@ -163,23 +172,8 @@
             <div class="todo-list-element-date">
               17.03.2016
             </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
+            <div class="todo-list-element-prio">
+              1
             </div>
           </div>
 
@@ -199,7 +193,11 @@
             <div class="todo-list-element-date">
               17.03.2016
             </div>
+            <div class="todo-list-element-prio">
+              1
+            </div>
           </div>
+
           <!-- TEST entry 02 - n -->
           <div class="todo-list-element">
             <div class="todo-list-element-checkbox">
@@ -216,7 +214,11 @@
             <div class="todo-list-element-date">
               17.03.2016
             </div>
+            <div class="todo-list-element-prio">
+              1
+            </div>
           </div>
+
           <!-- TEST entry 02 - n -->
           <div class="todo-list-element">
             <div class="todo-list-element-checkbox">
@@ -233,7 +235,11 @@
             <div class="todo-list-element-date">
               17.03.2016
             </div>
+            <div class="todo-list-element-prio">
+              1
+            </div>
           </div>
+
           <!-- TEST entry 02 - n -->
           <div class="todo-list-element">
             <div class="todo-list-element-checkbox">
@@ -250,7 +256,11 @@
             <div class="todo-list-element-date">
               17.03.2016
             </div>
+            <div class="todo-list-element-prio">
+              1
+            </div>
           </div>
+
           <!-- TEST entry 02 - n -->
           <div class="todo-list-element">
             <div class="todo-list-element-checkbox">
@@ -267,7 +277,11 @@
             <div class="todo-list-element-date">
               17.03.2016
             </div>
+            <div class="todo-list-element-prio">
+              1
+            </div>
           </div>
+
           <!-- TEST entry 02 - n -->
           <div class="todo-list-element">
             <div class="todo-list-element-checkbox">
@@ -284,7 +298,11 @@
             <div class="todo-list-element-date">
               17.03.2016
             </div>
+            <div class="todo-list-element-prio">
+              1
+            </div>
           </div>
+
           <!-- TEST entry 02 - n -->
           <div class="todo-list-element">
             <div class="todo-list-element-checkbox">
@@ -301,7 +319,11 @@
             <div class="todo-list-element-date">
               17.03.2016
             </div>
+            <div class="todo-list-element-prio">
+              1
+            </div>
           </div>
+
           <!-- TEST entry 02 - n -->
           <div class="todo-list-element">
             <div class="todo-list-element-checkbox">
@@ -318,7 +340,11 @@
             <div class="todo-list-element-date">
               17.03.2016
             </div>
+            <div class="todo-list-element-prio">
+              1
+            </div>
           </div>
+
           <!-- TEST entry 02 - n -->
           <div class="todo-list-element">
             <div class="todo-list-element-checkbox">
@@ -335,9 +361,128 @@
             <div class="todo-list-element-date">
               17.03.2016
             </div>
+            <div class="todo-list-element-prio">
+              1
+            </div>
           </div>
+
+          <!-- TEST entry 02 - n -->
+          <div class="todo-list-element">
+            <div class="todo-list-element-checkbox">
+              <form>
+                <input type="checkbox" name "done">
+              </form>
+            </div>
+            <div class="todo-list-element-description">
+              Coiffeur 10 Uhr
+            </div>
+            <div class="todo-list-element-delete">
+              <img src="res/delete2.png" alt="Delete item">
+            </div>
+            <div class="todo-list-element-date">
+              17.03.2016
+            </div>
+            <div class="todo-list-element-prio">
+              1
+            </div>
+          </div>
+
+          <!-- TEST entry 02 - n -->
+          <div class="todo-list-element">
+            <div class="todo-list-element-checkbox">
+              <form>
+                <input type="checkbox" name "done">
+              </form>
+            </div>
+            <div class="todo-list-element-description">
+              Coiffeur 10 Uhr
+            </div>
+            <div class="todo-list-element-delete">
+              <img src="res/delete2.png" alt="Delete item">
+            </div>
+            <div class="todo-list-element-date">
+              17.03.2016
+            </div>
+            <div class="todo-list-element-prio">
+              1
+            </div>
+          </div>
+
+          <!-- TEST entry 02 - n -->
+          <div class="todo-list-element">
+            <div class="todo-list-element-checkbox">
+              <form>
+                <input type="checkbox" name "done">
+              </form>
+            </div>
+            <div class="todo-list-element-description">
+              Coiffeur 10 Uhr
+            </div>
+            <div class="todo-list-element-delete">
+              <img src="res/delete2.png" alt="Delete item">
+            </div>
+            <div class="todo-list-element-date">
+              17.03.2016
+            </div>
+            <div class="todo-list-element-prio">
+              1
+            </div>
+          </div>
+
+          <!-- TEST entry 02 - n -->
+          <div class="todo-list-element">
+            <div class="todo-list-element-checkbox">
+              <form>
+                <input type="checkbox" name "done">
+              </form>
+            </div>
+            <div class="todo-list-element-description">
+              Coiffeur 10 Uhr
+            </div>
+            <div class="todo-list-element-delete">
+              <img src="res/delete2.png" alt="Delete item">
+            </div>
+            <div class="todo-list-element-date">
+              17.03.2016
+            </div>
+            <div class="todo-list-element-prio">
+              1
+            </div>
+          </div>
+
+          <!-- TEST entry 02 - n -->
+          <div class="todo-list-element">
+            <div class="todo-list-element-checkbox">
+              <form>
+                <input type="checkbox" name "done">
+              </form>
+            </div>
+            <div class="todo-list-element-description">
+              Coiffeur 10 Uhr
+            </div>
+            <div class="todo-list-element-delete">
+              <img src="res/delete2.png" alt="Delete item">
+            </div>
+            <div class="todo-list-element-date">
+              17.03.2016
+            </div>
+            <div class="todo-list-element-prio">
+              1
+            </div>
+          </div>
+
+
+
+
       </div>
 
+    </div>
+
+    <div class="footerContainer">
+      <div class="footer">
+        &copy; 2016 Trackersoft GmbH |
+        <a href="tos.html" class="a"> Terms of Use </a>
+      </div>
     </div>
 
 
