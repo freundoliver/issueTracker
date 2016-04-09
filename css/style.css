@@ -1,0 +1,87 @@
+/* used to center texts */
+.center {
+    text-align: center;
+}
+
+/* dont wrap text*/
+.noWrap{
+  white-space: nowrap;
+}
+
+.center-vertically {
+    line-height: 4em;
+}
+
+.no-bottom-margin {
+  margin-bottom: 0px !important;
+}
+
+.no-top-margin {
+  padding-top: 0px !important;
+}
+
+.adsfasdf{
+  margin-top: -1px !important;
+}
+
+
+.task-list {
+  flex: 1;
+  overflow:scroll;
+  overflow-x:hidden;
+}
+
+.task-list-header {
+  padding-right: 30px !important;
+}
+
+.task-insert-header{
+  padding-left: 30px !important;
+}
+
+.page-header-margin{
+  margin-top: 30px !important;
+}
+
+.title-text{
+  margin-left: 9em;
+}
+
+/*--------------------------------------*/
+/* -- For showing an individual todo -- */
+/*--------------------------------------*/
+.todo-list-element {
+  overflow: auto;
+
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+
+  border-bottom-style: solid;
+  border-bottom-color: #A8A8A1;
+  border-bottom-width: thin;
+}
+
+/* Sticky footer styles
+      -------------------------------------------------- */
+html, body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    display: flex;
+    flex-direction: column;
+
+    /* some kind of workaround... should be 100 but apparently it does not count the footer into those 100% :-( */
+    min-height: 100%;
+    max-height: 100%;
+
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+    height: 4em;
+    background-color: #f5f5f5;
+
+}
