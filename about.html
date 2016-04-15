@@ -1,52 +1,138 @@
-<html>
-  <head>
-    <meta charset="utf-8"/>
+<!doctype html>
+<html lang="en">
 
-    <title>Tracker Application</title>
-
-    <link rel="stylesheet" type="text/css" href="style.css">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="res/icon.png">
 
-  </head>
+    <title>Tracker Application</title>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    <!-- link stylesheet for datepicker -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    <!-- include jquery and jquery UI -->
+    <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI=" crossorigin="anonymous"></script>
+
+    <!-- include bootstrap main javascript -->
+    <script src="js/bootstrap.min.js"></script>
 
 
-  <body class="body">
+    <script>
+      // -- define datepicker
+        $(function() {
+            $("#datepicker").datepicker();
+        });
 
-    <div class="header">
-      <!-- contains the title image -->
+      // -- define slide toggle animation for  input fields -
+      function toggleInputFields(){
 
+        var wasToggled;
+
+        if ($("#inputFields").is(":hidden")){
+            wasToggled = true;
+        }
+        else {
+            wasToggled = false;
+        }
+
+        // toggle the div
+        $("#inputFields").slideToggle();
+
+        //change the arrow
+        if (wasToggled){
+          // was toggled before and is now not toggled anymore -> show toggle button
+          $(".glyphicon-menu-down").replaceWith('<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>');
+        }
+        else {
+          // was not toggled before and is now toggled -> show expand button
+          $(".glyphicon-menu-up").replaceWith('<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>');
+        }
+
+
+
+      }
+
+    </script>
+
+</head>
+
+
+<body>
+
+    <!-- container div, containing the whole content -->
+    <div id="wrap" class="container" >
+
+        <!-- header -->
+        <div class="page-header page-header-margin">
+            <a href="#" class="pull-left"><img src="res/logo.png"></a>
+            <div class="title-text">
+              <h1>Issue Tracker<small> - Track your most important tasks </small> </h1>
+          </div>
+        </div>
+
+        <!-- navbar -->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-center">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active"><a href="#">About<span class="sr-only">(current)</span></a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <!--task list header -->
+        <div class="panel panel-default generic-content">
+          <!-- header of tasks -->
+           <div class="panel-heading task-insert-header">
+             <div class="row">
+             <div class="col-md-12">
+               <b> About</b>
+             </div>
+           </div>
+          </div>
+
+          <div class="panel-body">
+
+            blalalalalal
+          </div>
+
+        </div>
+
+        <!-- footer -->
+        <div id="footer">
+            <div class="container">
+              <div class="center center-vertically">
+              &copy; 2016 Trackersoft GmbH |
+              <a href="tos.html" class="a"> Terms of Use </a>
+            </div>
+            </div>
+        </div>
 
     </div>
 
-    <div class="navigation">
+</body>
 
-      <div class="navigationHome">
-        <a href="index.html" class="a"> Home </a>
-      </div>
-
-      <div class="navigationAbout">
-        <a href="about.html" class="a"> <b> About </b> </a>
-      </div>
-
-      <div class="navigationContact">
-        <a href="contact.html" class="a"> Contact </a>
-      </div>
-
-    </div>
-
-    <div class="about">
-     Issue Tracker by Tamara Wenk, Stefan Boskovic, Stefan Kostic, Mel Umarova, Oliver Freund
-    </div>
-
-    <div class="footerContainer">
-      <div class="footer">
-        &copy; 2016 Trackersoft GmbH |
-        <a href="tos.html" class="a"> Terms of Use </a>
-      </div>
-    </div>
-
-
-
-  </body>
 </html>

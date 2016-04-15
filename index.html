@@ -33,18 +33,29 @@
       // -- define slide toggle animation for  input fields -
       function toggleInputFields(){
 
+        var wasToggled;
+
+        if ($("#inputFields").is(":hidden")){
+            wasToggled = true;
+        }
+        else {
+            wasToggled = false;
+        }
+
         // toggle the div
         $("#inputFields").slideToggle();
 
-        // find out if its toggled not or not
-        var isToggled = $("#inputFields:hidden");
-
-        if (isToggled){
+        //change the arrow
+        if (wasToggled){
+          // was toggled before and is now not toggled anymore -> show toggle button
           $(".glyphicon-menu-down").replaceWith('<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>');
         }
         else {
+          // was not toggled before and is now toggled -> show expand button
           $(".glyphicon-menu-up").replaceWith('<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>');
         }
+
+
 
       }
 
@@ -101,7 +112,7 @@
                   <b> Insert a new task</b>
                 </div>
                 <div class="col-md-1 center">
-                  <button type="button" class="btn btn-default btn-xs" aria-label="Expand" onclick="toggleInputFields();">
+                  <button type="button" class="btn btn-default btn-xs" aria-label="Expand">
                       <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
                     </button>
                 </div>
@@ -187,7 +198,7 @@
         </div>
 
         <!-- task list -->
-        <div class="panel panel-default task-list adsfasdf">
+        <div class="panel panel-default task-list">
 
             <!-- task content -->
             <div class="panel-body no-top-margin">
@@ -528,9 +539,6 @@
                         <img src="res/delete.png" alt="Delete item">
                     </div>
                 </div>
-
-
-
 
 
 
