@@ -52,10 +52,71 @@
                 // was not toggled before and is now toggled -> show expand button
                 $(".glyphicon-menu-up").replaceWith('<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>');
             }
+        };
 
+        // - function for mobile: collapse when nav menu shown
+        function mobileToggleContentBoxes() {
 
+          var menuOpen;
+          var inputFieldsVisible;
+          var issueListVisible;
 
-        }
+          // determine visibility of menu
+          // visiblity is gathered before action, so its always the old state
+          if ($("#navLinkList").is(":hidden")) {
+              menuOpen = false;
+          } else {
+              menuOpen = true;
+          }
+
+          // determine state of input fields
+          if ($("#inputFields").is(":hidden")) {
+              inputFieldsVisible = false;
+          } else {
+              inputFieldsVisible = true;
+          }
+
+          //Determine state of isse list
+          if ($("#issueList").is(":hidden")) {
+              issueListVisible = false;
+          } else {
+              issueListVisible = true;
+          }
+
+          // -- toggle inputFields --
+          var wasToggled;
+          //if menu is open now, it will be collapsed. this means that the input fields must be extended aswell
+          if (menuOpen == true && inputFieldsVisible == false) {
+            $("#inputFields").toggle();
+            wasToggled = true;
+          }
+          //if menu is closed now, it will be extended. this means that the input fields must be collapsed
+          if (menuOpen == false && inputFieldsVisible == true){
+            $("#inputFields").toggle();
+            wasToggled = false;
+          }
+
+          // change the arrow of the input fields
+          if (wasToggled) {
+              // was toggled before and is now not toggled anymore -> show toggle button
+              $(".glyphicon-menu-down").replaceWith('<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>');
+          } else {
+              // was not toggled before and is now toggled -> show expand button
+              $(".glyphicon-menu-up").replaceWith('<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>');
+          }
+
+          // -- toggle Issue list --
+          //if menu is open now, it will be collapsed. this means that the task list must be extended aswell
+          if (menuOpen == true && issueListVisible == false) {
+            $("#issueList").toggle();
+          }
+          //if menu is closed now, it will be extended. this means that the task list must be collapsed
+          if (menuOpen == false && issueListVisible == true){
+            $("#issueList").toggle();
+          }
+
+        };
+
     </script>
 
 </head>
@@ -79,7 +140,7 @@
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navLinkList" aria-expanded="false" id="menuBar" onclick="mobileToggleContentBoxes();">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -88,7 +149,7 @@
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse" id="navLinkList">
                     <ul class="nav navbar-nav navbar-center">
                         <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
                         <li><a href="about.html">About</a></li>
@@ -195,7 +256,7 @@
         </div>
 
         <!-- task list -->
-        <div class="panel panel-default task-list">
+        <div class="panel panel-default task-list" id="issueList">
 
             <!-- task content -->
             <div class="panel-body no-top-margin">
@@ -225,319 +286,6 @@
                         <img src="res/delete.png" alt="Delete item">
                     </div>
                 </div>
-
-                <!-- one task entry -->
-                <div class="row todo-list-element">
-                    <!-- input checkbox: task done? -->
-                    <div class="col-md-1 center">
-                        <form>
-                            <input type="checkbox" name "done">
-                        </form>
-                    </div>
-                    <!-- task name -->
-                    <div class="col-md-8">
-                        Blabla bla
-                    </div>
-                    <!-- priority of task -->
-                    <div class="col-md-1">
-                        1 - High
-                    </div>
-                    <!-- task due date -->
-                    <div class="col-md-1">
-                        20.03.2016
-                    </div>
-                    <!-- delete button -->
-                    <div class="col-md-1 center">
-                        <img src="res/delete.png" alt="Delete item">
-                    </div>
-                </div>
-                <!-- one task entry -->
-                <div class="row todo-list-element">
-                    <!-- input checkbox: task done? -->
-                    <div class="col-md-1 center">
-                        <form>
-                            <input type="checkbox" name "done">
-                        </form>
-                    </div>
-                    <!-- task name -->
-                    <div class="col-md-8">
-                        Blabla bla
-                    </div>
-                    <!-- priority of task -->
-                    <div class="col-md-1">
-                        1 - High
-                    </div>
-                    <!-- task due date -->
-                    <div class="col-md-1">
-                        20.03.2016
-                    </div>
-                    <!-- delete button -->
-                    <div class="col-md-1 center">
-                        <img src="res/delete.png" alt="Delete item">
-                    </div>
-                </div>
-
-                <!-- one task entry -->
-                <div class="row todo-list-element">
-                    <!-- input checkbox: task done? -->
-                    <div class="col-md-1 center">
-                        <form>
-                            <input type="checkbox" name "done">
-                        </form>
-                    </div>
-                    <!-- task name -->
-                    <div class="col-md-8">
-                        Blabla bla
-                    </div>
-                    <!-- priority of task -->
-                    <div class="col-md-1">
-                        1 - High
-                    </div>
-                    <!-- task due date -->
-                    <div class="col-md-1">
-                        20.03.2016
-                    </div>
-                    <!-- delete button -->
-                    <div class="col-md-1 center">
-                        <img src="res/delete.png" alt="Delete item">
-                    </div>
-                </div>
-
-                <!-- one task entry -->
-                <div class="row todo-list-element">
-                    <!-- input checkbox: task done? -->
-                    <div class="col-md-1 center">
-                        <form>
-                            <input type="checkbox" name "done">
-                        </form>
-                    </div>
-                    <!-- task name -->
-                    <div class="col-md-8">
-                        Blabla bla
-                    </div>
-                    <!-- priority of task -->
-                    <div class="col-md-1">
-                        1 - High
-                    </div>
-                    <!-- task due date -->
-                    <div class="col-md-1">
-                        20.03.2016
-                    </div>
-                    <!-- delete button -->
-                    <div class="col-md-1 center">
-                        <img src="res/delete.png" alt="Delete item">
-                    </div>
-                </div>
-
-                <!-- one task entry -->
-                <div class="row todo-list-element">
-                    <!-- input checkbox: task done? -->
-                    <div class="col-md-1 center">
-                        <form>
-                            <input type="checkbox" name "done">
-                        </form>
-                    </div>
-                    <!-- task name -->
-                    <div class="col-md-8">
-                        Blabla bla
-                    </div>
-                    <!-- priority of task -->
-                    <div class="col-md-1">
-                        1 - High
-                    </div>
-                    <!-- task due date -->
-                    <div class="col-md-1">
-                        20.03.2016
-                    </div>
-                    <!-- delete button -->
-                    <div class="col-md-1 center">
-                        <img src="res/delete.png" alt="Delete item">
-                    </div>
-                </div>
-
-                <!-- one task entry -->
-                <div class="row todo-list-element">
-                    <!-- input checkbox: task done? -->
-                    <div class="col-md-1 center">
-                        <form>
-                            <input type="checkbox" name "done">
-                        </form>
-                    </div>
-                    <!-- task name -->
-                    <div class="col-md-8">
-                        Blabla bla
-                    </div>
-                    <!-- priority of task -->
-                    <div class="col-md-1">
-                        1 - High
-                    </div>
-                    <!-- task due date -->
-                    <div class="col-md-1">
-                        20.03.2016
-                    </div>
-                    <!-- delete button -->
-                    <div class="col-md-1 center">
-                        <img src="res/delete.png" alt="Delete item">
-                    </div>
-                </div>
-
-                <!-- one task entry -->
-                <div class="row todo-list-element">
-                    <!-- input checkbox: task done? -->
-                    <div class="col-md-1 center">
-                        <form>
-                            <input type="checkbox" name "done">
-                        </form>
-                    </div>
-                    <!-- task name -->
-                    <div class="col-md-8">
-                        Blabla bla
-                    </div>
-                    <!-- priority of task -->
-                    <div class="col-md-1">
-                        1 - High
-                    </div>
-                    <!-- task due date -->
-                    <div class="col-md-1">
-                        20.03.2016
-                    </div>
-                    <!-- delete button -->
-                    <div class="col-md-1 center">
-                        <img src="res/delete.png" alt="Delete item">
-                    </div>
-                </div>
-
-                <!-- one task entry -->
-                <div class="row todo-list-element">
-                    <!-- input checkbox: task done? -->
-                    <div class="col-md-1 center">
-                        <form>
-                            <input type="checkbox" name "done">
-                        </form>
-                    </div>
-                    <!-- task name -->
-                    <div class="col-md-8">
-                        Blabla bla
-                    </div>
-                    <!-- priority of task -->
-                    <div class="col-md-1">
-                        1 - High
-                    </div>
-                    <!-- task due date -->
-                    <div class="col-md-1">
-                        20.03.2016
-                    </div>
-                    <!-- delete button -->
-                    <div class="col-md-1 center">
-                        <img src="res/delete.png" alt="Delete item">
-                    </div>
-                </div>
-
-                <!-- one task entry -->
-                <div class="row todo-list-element">
-                    <!-- input checkbox: task done? -->
-                    <div class="col-md-1 center">
-                        <form>
-                            <input type="checkbox" name "done">
-                        </form>
-                    </div>
-                    <!-- task name -->
-                    <div class="col-md-8">
-                        Blabla bla
-                    </div>
-                    <!-- priority of task -->
-                    <div class="col-md-1">
-                        1 - High
-                    </div>
-                    <!-- task due date -->
-                    <div class="col-md-1">
-                        20.03.2016
-                    </div>
-                    <!-- delete button -->
-                    <div class="col-md-1 center">
-                        <img src="res/delete.png" alt="Delete item">
-                    </div>
-                </div>
-
-                <!-- one task entry -->
-                <div class="row todo-list-element">
-                    <!-- input checkbox: task done? -->
-                    <div class="col-md-1 center">
-                        <form>
-                            <input type="checkbox" name "done">
-                        </form>
-                    </div>
-                    <!-- task name -->
-                    <div class="col-md-8">
-                        Blabla bla
-                    </div>
-                    <!-- priority of task -->
-                    <div class="col-md-1">
-                        1 - High
-                    </div>
-                    <!-- task due date -->
-                    <div class="col-md-1">
-                        20.03.2016
-                    </div>
-                    <!-- delete button -->
-                    <div class="col-md-1 center">
-                        <img src="res/delete.png" alt="Delete item">
-                    </div>
-                </div>
-
-                <!-- one task entry -->
-                <div class="row todo-list-element">
-                    <!-- input checkbox: task done? -->
-                    <div class="col-md-1 center">
-                        <form>
-                            <input type="checkbox" name "done">
-                        </form>
-                    </div>
-                    <!-- task name -->
-                    <div class="col-md-8">
-                        Blabla bla
-                    </div>
-                    <!-- priority of task -->
-                    <div class="col-md-1">
-                        1 - High
-                    </div>
-                    <!-- task due date -->
-                    <div class="col-md-1">
-                        20.03.2016
-                    </div>
-                    <!-- delete button -->
-                    <div class="col-md-1 center">
-                        <img src="res/delete.png" alt="Delete item">
-                    </div>
-                </div>
-
-                <!-- one task entry -->
-                <div class="row todo-list-element">
-                    <!-- input checkbox: task done? -->
-                    <div class="col-md-1 center">
-                        <form>
-                            <input type="checkbox" name "done">
-                        </form>
-                    </div>
-                    <!-- task name -->
-                    <div class="col-md-8">
-                        Blabla bla
-                    </div>
-                    <!-- priority of task -->
-                    <div class="col-md-1">
-                        1 - High
-                    </div>
-                    <!-- task due date -->
-                    <div class="col-md-1">
-                        20.03.2016
-                    </div>
-                    <!-- delete button -->
-                    <div class="col-md-1 center">
-                        <img src="res/delete.png" alt="Delete item">
-                    </div>
-                </div>
-
-
 
             </div>
 
