@@ -1,51 +1,108 @@
-<html>
-  <head>
-    <meta charset="utf-8"/>
+<!doctype html>
+<html lang="en">
 
-    <title>Tracker Application</title>
-
-    <link rel="stylesheet" type="text/css" href="style.css">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="res/icon.png">
 
-  </head>
+    <title>Tracker Application</title>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    <!-- link stylesheet for datepicker -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    <!-- include jquery and jquery UI -->
+    <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI=" crossorigin="anonymous"></script>
+
+    <!-- include bootstrap main javascript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</head>
 
 
-  <body class="body">
+<body>
 
-    <div class="header">
-      <!-- contains the title image -->
+    <!-- container div, containing the whole content -->
+    <div id="wrap" class="container">
 
+        <!-- header -->
+        <div class="page-header page-header-margin">
+            <a href="#" class="pull-left"><img src="res/logo.png"></a>
+            <div class="title-text">
+                <h1>Issue Tracker<small> - Track your most important tasks </small> </h1>
+            </div>
+        </div>
+
+        <!-- navbar -->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-center">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li class="active"><a href="#">Contact<span class="sr-only">(current)</span></a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <!--task list header -->
+        <div class="panel panel-default">
+            <!-- header of tasks -->
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-12">
+                        <b>Contact</b>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        For any feedback you can contact the development team by writing a message to info[at]trackersoft.com
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="generic-content">
+            <!-- flex filler, uses up all the remaining space on the site -->
+        </div>
+
+
+        <!-- footer -->
+        <div id="footer">
+            <div class="container">
+                <div class="center center-vertically">
+                    &copy; 2016 Trackersoft GmbH |
+                    <a href="tos.html" class="a"> Terms of Use </a>
+                </div>
+            </div>
+        </div>
 
     </div>
 
-    <div class="navigation">
+</body>
 
-      <div class="navigationHome">
-        <a href="index.html" class="a"> Home </a>
-      </div>
-
-      <div class="navigationAbout">
-        <a href="about.html" class="a"> About </a>
-      </div>
-
-      <div class="navigationContact">
-        <a href="contact.html" class="a"> <b> Contact </b> </a>
-      </div>
-
-    </div>
-
-    <div class="contact">
-      issue_tracker@trackersoft.com
-
-    </div>
-
-    <div class="footerContainer">
-      <div class="footer">
-        &copy; 2016 Trackersoft GmbH |
-        <a href="tos.html" class="a"> Terms of Use </a>
-      </div>
-    </div>
-
-  </body>
 </html>

@@ -23,58 +23,20 @@
     <!-- include bootstrap main javascript -->
     <script src="js/bootstrap.min.js"></script>
 
-
-    <script>
-      // -- define datepicker
-        $(function() {
-            $("#datepicker").datepicker();
-        });
-
-      // -- define slide toggle animation for  input fields -
-      function toggleInputFields(){
-
-        var wasToggled;
-
-        if ($("#inputFields").is(":hidden")){
-            wasToggled = true;
-        }
-        else {
-            wasToggled = false;
-        }
-
-        // toggle the div
-        $("#inputFields").slideToggle();
-
-        //change the arrow
-        if (wasToggled){
-          // was toggled before and is now not toggled anymore -> show toggle button
-          $(".glyphicon-menu-down").replaceWith('<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>');
-        }
-        else {
-          // was not toggled before and is now toggled -> show expand button
-          $(".glyphicon-menu-up").replaceWith('<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>');
-        }
-
-
-
-      }
-
-    </script>
-
 </head>
 
 
 <body>
 
     <!-- container div, containing the whole content -->
-    <div id="wrap" class="container" >
+    <div id="wrap" class="container">
 
         <!-- header -->
         <div class="page-header page-header-margin">
             <a href="#" class="pull-left"><img src="res/logo.png"></a>
             <div class="title-text">
-              <h1>Issue Tracker<small> - Track your most important tasks </small> </h1>
-          </div>
+                <h1>Issue Tracker<small> - Track your most important tasks </small> </h1>
+            </div>
         </div>
 
         <!-- navbar -->
@@ -104,30 +66,56 @@
         </nav>
 
         <!--task list header -->
-        <div class="panel panel-default generic-content">
-          <!-- header of tasks -->
-           <div class="panel-heading task-insert-header">
-             <div class="row">
-             <div class="col-md-12">
-               <b> About</b>
-             </div>
-           </div>
-          </div>
+        <div class="panel panel-default">
+            <!-- header of tasks -->
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-12">
+                        <b> About</b>
+                    </div>
+                </div>
+            </div>
 
-          <div class="panel-body">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        Issue Tracker by Tamara Wenk, Stefan Boskovic, Stefan Kostic, Mel Umarova, Oliver Freund
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <b>Version: </b>
+                    </div>
+                    <div class="col-md-11">
+                        Alpha 0.54
+                    </div>
 
-            blalalalalal
-          </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <b>Release: </b>
+                    </div>
+                    <div class="col-md-11">
+                        17.04.2016
+                    </div>
+                </div>
+
+            </div>
 
         </div>
+
+        <div class="generic-content">
+            <!-- flex filler, uses up all the remaining space on the site -->
+        </div>
+
 
         <!-- footer -->
         <div id="footer">
             <div class="container">
-              <div class="center center-vertically">
-              &copy; 2016 Trackersoft GmbH |
-              <a href="tos.html" class="a"> Terms of Use </a>
-            </div>
+                <div class="center center-vertically">
+                    &copy; 2016 Trackersoft GmbH |
+                    <a href="tos.html" class="a"> Terms of Use </a>
+                </div>
             </div>
         </div>
 

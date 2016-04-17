@@ -25,40 +25,37 @@
 
 
     <script>
-      // -- define datepicker
+        // -- define datepicker
         $(function() {
             $("#datepicker").datepicker();
         });
 
-      // -- define slide toggle animation for  input fields -
-      function toggleInputFields(){
+        // -- define slide toggle animation for  input fields -
+        function toggleInputFields() {
 
-        var wasToggled;
+            var wasToggled;
 
-        if ($("#inputFields").is(":hidden")){
-            wasToggled = true;
+            if ($("#inputFields").is(":hidden")) {
+                wasToggled = true;
+            } else {
+                wasToggled = false;
+            }
+
+            // toggle the div
+            $("#inputFields").slideToggle();
+
+            //change the arrow
+            if (wasToggled) {
+                // was toggled before and is now not toggled anymore -> show toggle button
+                $(".glyphicon-menu-down").replaceWith('<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>');
+            } else {
+                // was not toggled before and is now toggled -> show expand button
+                $(".glyphicon-menu-up").replaceWith('<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>');
+            }
+
+
+
         }
-        else {
-            wasToggled = false;
-        }
-
-        // toggle the div
-        $("#inputFields").slideToggle();
-
-        //change the arrow
-        if (wasToggled){
-          // was toggled before and is now not toggled anymore -> show toggle button
-          $(".glyphicon-menu-down").replaceWith('<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>');
-        }
-        else {
-          // was not toggled before and is now toggled -> show expand button
-          $(".glyphicon-menu-up").replaceWith('<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>');
-        }
-
-
-
-      }
-
     </script>
 
 </head>
@@ -67,14 +64,14 @@
 <body>
 
     <!-- container div, containing the whole content -->
-    <div id="wrap" class="container" >
+    <div id="wrap" class="container">
 
         <!-- header -->
         <div class="page-header page-header-margin">
             <a href="#" class="pull-left"><img src="res/logo.png"></a>
             <div class="title-text">
-              <h1>Issue Tracker<small> - Track your most important tasks </small> </h1>
-          </div>
+                <h1>Issue Tracker<small> - Track your most important tasks </small> </h1>
+            </div>
         </div>
 
         <!-- navbar -->
@@ -108,15 +105,15 @@
             <div class="panel-heading task-insert-header" onclick="toggleInputFields();">
 
                 <div class="row">
-                <div class="col-md-11">
-                  <b> Insert a new task</b>
+                    <div class="col-md-11">
+                        <b> Insert a new task</b>
+                    </div>
+                    <div class="col-md-1 center">
+                        <button type="button" class="btn btn-default btn-xs" aria-label="Expand">
+                            <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </div>
-                <div class="col-md-1 center">
-                  <button type="button" class="btn btn-default btn-xs" aria-label="Expand">
-                      <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
-                    </button>
-                </div>
-              </div>
             </div>
 
             <!-- include in a panel -->
@@ -170,31 +167,31 @@
 
         <!--task list header -->
         <div class="panel panel-default no-bottom-margin">
-          <!-- header of tasks -->
-           <div class="panel-heading task-list-header">
-              <div class="row">
+            <!-- header of tasks -->
+            <div class="panel-heading task-list-header">
+                <div class="row">
 
-                  <div class="col-md-1 center">
-                      <b>Done</b>
-                  </div>
+                    <div class="col-md-1 center">
+                        <b>Done</b>
+                    </div>
 
-                  <div class="col-md-8">
-                      <b>Task Name</b>
-                  </div>
+                    <div class="col-md-8">
+                        <b>Task Name</b>
+                    </div>
 
-                  <div class="col-md-1">
-                      <b>Prio</b>
-                  </div>
+                    <div class="col-md-1">
+                        <b>Prio</b>
+                    </div>
 
-                  <div class="col-md-1 noWrap">
-                      <b>Due Date</b>
-                  </div>
+                    <div class="col-md-1 noWrap">
+                        <b>Due Date</b>
+                    </div>
 
-                  <div class="col-md-1 center">
-                      <b>Delete</b>
-                  </div>
-              </div>
-          </div>
+                    <div class="col-md-1 center">
+                        <b>Delete</b>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- task list -->
@@ -549,10 +546,10 @@
         <!-- footer -->
         <div id="footer">
             <div class="container">
-              <div class="center center-vertically">
-              &copy; 2016 Trackersoft GmbH |
-              <a href="tos.html" class="a"> Terms of Use </a>
-            </div>
+                <div class="center center-vertically">
+                    &copy; 2016 Trackersoft GmbH |
+                    <a href="tos.html" class="a"> Terms of Use </a>
+                </div>
             </div>
         </div>
 
