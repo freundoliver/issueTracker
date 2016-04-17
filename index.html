@@ -1,490 +1,308 @@
-<html>
-  <head>
-    <meta charset="utf-8"/>
+<!doctype html>
+<html lang="en">
 
-    <title>Tracker Application</title>
-
-    <link rel="stylesheet" type="text/css" href="style.css">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="res/icon.png">
 
-  </head>
+    <title>Tracker Application</title>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    <!-- link stylesheet for datepicker -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    <!-- include jquery and jquery UI -->
+    <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI=" crossorigin="anonymous"></script>
+
+    <!-- include bootstrap main javascript -->
+    <script src="js/bootstrap.min.js"></script>
 
 
-  <body class="body">
+    <script>
+        // -- define datepicker
+        $(function() {
+            $("#datepicker").datepicker();
+        });
 
-    <div class="header">
-      <!-- contains the title image -->
+        // -- define slide toggle animation for  input fields -
+        function toggleInputFields() {
 
+            var wasToggled;
+
+            if ($("#inputFields").is(":hidden")) {
+                wasToggled = true;
+            } else {
+                wasToggled = false;
+            }
+
+            // toggle the div
+            $("#inputFields").slideToggle();
+
+            //change the arrow
+            if (wasToggled) {
+                // was toggled before and is now not toggled anymore -> show toggle button
+                $(".glyphicon-menu-down").replaceWith('<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>');
+            } else {
+                // was not toggled before and is now toggled -> show expand button
+                $(".glyphicon-menu-up").replaceWith('<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>');
+            }
+        };
+
+        // - function for mobile: collapse when nav menu shown
+        function mobileToggleContentBoxes() {
+
+          var menuOpen;
+          var inputFieldsVisible;
+          var issueListVisible;
+
+          // determine visibility of menu
+          // visiblity is gathered before action, so its always the old state
+          if ($("#navLinkList").is(":hidden")) {
+              menuOpen = false;
+          } else {
+              menuOpen = true;
+          }
+
+          // determine state of input fields
+          if ($("#inputFields").is(":hidden")) {
+              inputFieldsVisible = false;
+          } else {
+              inputFieldsVisible = true;
+          }
+
+          //Determine state of isse list
+          if ($("#issueList").is(":hidden")) {
+              issueListVisible = false;
+          } else {
+              issueListVisible = true;
+          }
+
+          // -- toggle inputFields --
+          var wasToggled;
+          //if menu is open now, it will be collapsed. this means that the input fields must be extended aswell
+          if (menuOpen == true && inputFieldsVisible == false) {
+            $("#inputFields").toggle();
+            wasToggled = true;
+          }
+          //if menu is closed now, it will be extended. this means that the input fields must be collapsed
+          if (menuOpen == false && inputFieldsVisible == true){
+            $("#inputFields").toggle();
+            wasToggled = false;
+          }
+
+          // change the arrow of the input fields
+          if (wasToggled) {
+              // was toggled before and is now not toggled anymore -> show toggle button
+              $(".glyphicon-menu-down").replaceWith('<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>');
+          } else {
+              // was not toggled before and is now toggled -> show expand button
+              $(".glyphicon-menu-up").replaceWith('<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>');
+          }
+
+          // -- toggle Issue list --
+          //if menu is open now, it will be collapsed. this means that the task list must be extended aswell
+          if (menuOpen == true && issueListVisible == false) {
+            $("#issueList").toggle();
+          }
+          //if menu is closed now, it will be extended. this means that the task list must be collapsed
+          if (menuOpen == false && issueListVisible == true){
+            $("#issueList").toggle();
+          }
+
+        };
+
+    </script>
+
+</head>
+
+
+<body>
+
+    <!-- container div, containing the whole content -->
+    <div id="wrap" class="container">
+
+        <!-- header -->
+        <div class="page-header page-header-margin">
+            <a href="#" class="pull-left"><img src="res/logo.png"></a>
+            <div class="title-text">
+                <h1>Issue Tracker<small> - Track your most important tasks </small> </h1>
+            </div>
+        </div>
+
+        <!-- navbar -->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navLinkList" aria-expanded="false" id="menuBar" onclick="mobileToggleContentBoxes();">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navLinkList">
+                    <ul class="nav navbar-nav navbar-center">
+                        <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <!-- input form -->
+        <div class="panel panel-default">
+            <div class="panel-heading task-insert-header" onclick="toggleInputFields();">
+
+                <div class="row">
+                    <div class="col-md-11">
+                        <b> Insert a new task</b>
+                    </div>
+                    <div class="col-md-1 center">
+                        <button type="button" class="btn btn-default btn-xs" aria-label="Expand">
+                            <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- include in a panel -->
+            <div class="panel-body" id="inputFields">
+
+                <form>
+                    <div class="form-group">
+
+                        <div class="col-md-12">
+
+                            <div class="col-md-8">
+                                <div class="form-group row">
+                                    <label for="InputTaskName">Task name</label>
+                                    <input type="text" class="form-control" id="InputTaskName" placeholder="enter your task">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+
+                            <div class="form-group row">
+
+                                <div class="col-md-2">
+                                    <label for="InputPriority">Priority</label>
+                                    <select class="form-control" id="InputPriority">
+                                        <option>1 - High</option>
+                                        <option>2 - Medium</option>
+                                        <option>3 - Low</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label for="datepicker">Due date</label>
+                                    <input type="text" class="form-control" id="datepicker">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="col-md-1">
+                                <div class="form-group row">
+                                    <button type="submit" class="btn btn-default">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <!--task list header -->
+        <div class="panel panel-default no-bottom-margin">
+            <!-- header of tasks -->
+            <div class="panel-heading task-list-header">
+                <div class="row">
+
+                    <div class="col-md-1 center">
+                        <b>Done</b>
+                    </div>
+
+                    <div class="col-md-8">
+                        <b>Task Name</b>
+                    </div>
+
+                    <div class="col-md-1">
+                        <b>Prio</b>
+                    </div>
+
+                    <div class="col-md-1 noWrap">
+                        <b>Due Date</b>
+                    </div>
+
+                    <div class="col-md-1 center">
+                        <b>Delete</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- task list -->
+        <div class="panel panel-default task-list" id="issueList">
+
+            <!-- task content -->
+            <div class="panel-body no-top-margin">
+
+                <!-- one task entry keep this one!!!-->
+                <div class="row todo-list-element">
+                    <!-- input checkbox: task done? -->
+                    <div class="col-md-1 center">
+                        <form>
+                            <input type="checkbox" name "done">
+                        </form>
+                    </div>
+                    <!-- task name -->
+                    <div class="col-md-8">
+                        Blabla bla
+                    </div>
+                    <!-- priority of task -->
+                    <div class="col-md-1">
+                        1 - High
+                    </div>
+                    <!-- task due date -->
+                    <div class="col-md-1">
+                        20.03.2016
+                    </div>
+                    <!-- delete button -->
+                    <div class="col-md-1 center">
+                        <img src="res/delete.png" alt="Delete item">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- footer -->
+        <div id="footer">
+            <div class="container">
+                <div class="center center-vertically">
+                    &copy; 2016 Trackersoft GmbH |
+                    <a href="tos.html" class="a"> Terms of Use </a>
+                </div>
+            </div>
+        </div>
 
     </div>
 
-    <div class="navigation">
+</body>
 
-      <div class="navigationHome">
-        <a href="index.html" class="a"> <b> Home </b> </a>
-      </div>
-
-      <div class="navigationAbout">
-        <a href="about.html" class="a"> About </a>
-      </div>
-
-      <div class="navigationContact">
-        <a href="contact.html" class="a"> Contact </a>
-      </div>
-
-    </div>
-
-
-    <div class="insert">
-      <!-- part for creating a new task -->
-      <form>
-        <!-- first line -->
-        <div class="insert-element-description">
-          <b>Task Name</b></br>
-          <input type="text" name="name" size="100" class="insert-element-description-text"><br>
-        </div>
-        <div class="insert-element-date">
-          <b>Due-Date</b></br>
-          <input type="text" name="date" size="13" class="insert-element-date-text"><br>
-        </div>
-        <!--second line -->
-        <div class="insert-element-prio-text">
-          <b>Prio</b></br>
-          <select class="insert-element-prio"> name="Prio" size="3"
-            <option>1 - High</option>
-            <option>2 - Medium</option>
-            <option>3 - Low</option>
-          </select>
-        </div>
-        <div class="insert-element-button">
-          <input type="submit" value="Add Task!">
-        </div>
-      </form>
-    </div>
-
-
-    <div class="todo-list">
-      <!-- part for viewing the tasks -->
-
-      <!-- THIS IS THE HEADER, DO NOT DELETE! -->
-      <div class="todo-list-element-hdr">
-        <div class="todo-list-element-checkbox-hdr">
-          <b>Done</b>
-        </div>
-
-        <div class="todo-list-element-description-hdr">
-          <b>Description</b>
-        </div>
-
-        <div class="todo-list-element-delete-hdr">
-         <b>Delete</b>
-        </div>
-
-        <div class="todo-list-element-date-hdr">
-          <b>Due Date</b>
-        </div>
-
-        <div class="todo-list-element-prio-hdr">
-          <b>Prio</b>
-        </div>
-
-      </div>
-
-      <div class="todo-list-content">
-        <!-- TEST entry 01 -->
-        <!-- DO NOT DELETE, leave as example for Jquery structure -->
-        <div class="todo-list-element">
-          <div class="todo-list-element-checkbox">
-            <form>
-              <input type="checkbox" name "done">
-            </form>
-          </div>
-          <div class="todo-list-element-description">
-            Coiffeur 10 Uhr
-          </div>
-          <div class="todo-list-element-delete">
-            <img src="res/delete2.png" alt="Delete item">
-          </div>
-          <div class="todo-list-element-date">
-            17.03.2016
-          </div>
-          <div class="todo-list-element-prio">
-            1
-          </div>
-        </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-          <!-- TEST entry 02 - n -->
-          <div class="todo-list-element">
-            <div class="todo-list-element-checkbox">
-              <form>
-                <input type="checkbox" name "done">
-              </form>
-            </div>
-            <div class="todo-list-element-description">
-              Coiffeur 10 Uhr
-            </div>
-            <div class="todo-list-element-delete">
-              <img src="res/delete2.png" alt="Delete item">
-            </div>
-            <div class="todo-list-element-date">
-              17.03.2016
-            </div>
-            <div class="todo-list-element-prio">
-              1
-            </div>
-          </div>
-
-
-
-
-      </div>
-
-    </div>
-
-    <div class="footerContainer">
-      <div class="footer">
-        &copy; 2016 Trackersoft GmbH |
-        <a href="tos.html" class="a"> Terms of Use </a>
-      </div>
-    </div>
-
-
-  </body>
 </html>
