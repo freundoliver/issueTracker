@@ -23,8 +23,8 @@
     <!-- include bootstrap main javascript -->
     <script src="js/bootstrap.min.js"></script>
 
-
-    <script>
+    <!-- base UI js -->
+    <script type="text/javascript">
         // -- define datepicker
         $(function() {
             $("#datepicker").datepicker();
@@ -119,6 +119,184 @@
 
     </script>
 
+    <!-- storage js -->
+    <script type="text/javascript">
+
+      //if the website is loaded: read localStorage
+      $( document ).ready(function() {
+        localGetProjectID();
+
+        localGetTasks();
+      });
+
+      function postNewProjectID() {
+        //this function posts a new project id to the REST
+        //expected results: OK, or Project ID allready there
+        var url="http://zhaw-weng-api.herokuapp.com/api/projects/";
+        var data='{ "title": "random" }';
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: data,
+            dataType: "json",
+            success: function(result) {
+                switch (result) {
+                    case true:
+                        processResponse(result);
+                        break;
+                    default:
+                        alert("yay");
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        })
+
+        //jQuery.getJSON(url,data,success(xhr, ajaxOptions, thrownError));
+
+      }
+
+      /*function success(xhr, ajaxOptions, thrownError){
+        alert(xhr.status);
+        alert(thrownError);
+      } */
+
+      function localStoreProjectID(){
+        //check if there was allready a project id
+        var oldProjectID = localStorage.getItem("projectID");
+
+        // new project id
+        var projectID = $("#InputProjectName").val();
+
+        //if project IDs are different: set new one and clear the old tasks!
+        if (oldProjectID != projectID){
+          localStorage.setItem("projectID", projectID);
+          localStorage.removeItem("taskArray");
+
+          location.reload();
+        }
+
+      }
+
+      function localGetProjectID(){
+        // Retrieve
+        $("#InputProjectName").val(localStorage.getItem("projectID"));
+      }
+
+      function enterNewTask(){
+        //check if projectID is set
+        var projectID = localStorage.getItem("projectID");
+
+        if (projectID != null){
+
+        var taskName = $("#inputTaskName").val();
+        var taskPrio = $("#inputPriority").val();
+        var taskDueDate = $("#datepicker").val();
+        var uuid = guid();
+
+        var taskEntry = '<div class="row todo-list-element" id="'+uuid+'" > <!-- input checkbox: task done? --> <div class="col-md-1 center"> <form> <input type="checkbox" name="done" value="true" empty onclick="completeTask(\''+uuid+'\');"></form></div><!-- task name --><div class="col-md-8">'+taskName+'</div><!-- priority of task --><div class="col-md-1">'+taskPrio+'</div><!-- task due date --><div class="col-md-1">'+taskDueDate+'</div><!-- delete button --><div class="col-md-1 center"><img src="res/delete.png" alt="Delete item" onclick="deleteTask(\''+uuid+'\');"></div></div>';
+
+        localStoreTask(taskEntry, uuid);
+
+        $("#issueListContent").prepend(taskEntry);
+
+        }
+        else {
+          alert ("Plese insert a Project-ID");
+        }
+
+      }
+
+      function localStoreTask(taskEntry, uuid){
+
+          //get task array
+          var taskArray = JSON.parse(localStorage.getItem("taskArray"));
+
+          if (taskArray != null){
+            var taskArrayLength = taskArray.length;
+            //this is the new task ID!
+            taskArray[taskArrayLength] = new Array(2);
+            taskArray[taskArrayLength][0] = uuid;
+            taskArray[taskArrayLength][1] = taskEntry;
+
+          }
+          else{
+            //create new array
+
+            var taskArray = new Array();
+            taskArray[0] = new Array(2);
+            taskArray[0][0] = uuid;
+            taskArray[0][1] = taskEntry;
+
+          }
+
+          //store again
+          localStorage.setItem("taskArray", JSON.stringify(taskArray));
+      }
+
+      function localGetTasks(){
+
+        //get task array
+        var taskArray = JSON.parse(localStorage.getItem("taskArray"));
+
+        jQuery.each(taskArray, function(index,item){
+          if (item != null){
+            $("#issueListContent").prepend(item[1]);
+          }
+        });
+
+      }
+
+      function guid() {
+        function s4() {
+          return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+          s4() + '-' + s4() + s4() + s4();
+      }
+
+    </script>
+
+    <!--scripts for issue actions-->
+    <script type="text/javascript">
+      function deleteTask(uuid){
+        //delete div with uuid
+        $('#'+uuid).remove();
+
+        //delete from localstorage
+        var taskArray = JSON.parse(localStorage.getItem("taskArray"));
+
+        jQuery.each(taskArray, function(index,item){
+
+          if (item!=null){
+            if (item[0] == uuid){
+              delete taskArray[index];
+            }
+          }
+        });
+
+        //store updated array again
+        localStorage.setItem("taskArray", JSON.stringify(taskArray));
+
+      }
+
+      function completeTask(uuid){
+
+        //get the div by uuid and replace it on the localcache
+        var task = $('#'+uuid)[0].outerHTML;
+
+        alert (task);
+
+      }
+
+    </script>
+
+
 </head>
 
 
@@ -161,6 +339,25 @@
             <!-- /.container-fluid -->
         </nav>
 
+        <!-- project switcher -->
+        <div class="panel panel-default">
+            <div class="panel-heading task-insert-header">
+
+                <div class="row">
+                    <div class="col-md-1 align-center">
+                        <b> Project</b>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="InputProjectName" placeholder="enter Project ID">
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-default" onclick="localStoreProjectID();">Submit Project</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
         <!-- input form -->
         <div class="panel panel-default">
             <div class="panel-heading task-insert-header" onclick="toggleInputFields();">
@@ -188,7 +385,7 @@
                             <div class="col-md-8">
                                 <div class="form-group row">
                                     <label for="InputTaskName">Task name</label>
-                                    <input type="text" class="form-control" id="InputTaskName" placeholder="enter your task">
+                                    <input type="text" class="form-control" id="inputTaskName" placeholder="enter your task">
                                 </div>
                             </div>
                         </div>
@@ -199,9 +396,9 @@
 
                                 <div class="col-md-2">
                                     <label for="InputPriority">Priority</label>
-                                    <select class="form-control" id="InputPriority">
+                                    <select class="form-control" id="inputPriority">
                                         <option>1 - High</option>
-                                        <option>2 - Medium</option>
+                                        <option>2 - Med.</option>
                                         <option>3 - Low</option>
                                     </select>
                                 </div>
@@ -216,7 +413,7 @@
                         <div class="col-md-12">
                             <div class="col-md-1">
                                 <div class="form-group row">
-                                    <button type="submit" class="btn btn-default">Submit</button>
+                                    <button type="button" class="btn btn-default" onclick="enterNewTask()">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -259,33 +456,33 @@
         <div class="panel panel-default task-list" id="issueList">
 
             <!-- task content -->
-            <div class="panel-body no-top-margin">
+            <div class="panel-body no-top-margin" id="issueListContent">
 
-                <!-- one task entry keep this one!!!-->
-                <div class="row todo-list-element">
+                <!-- example of task-->
+                <!-- <div class="row todo-list-element"> -->
                     <!-- input checkbox: task done? -->
-                    <div class="col-md-1 center">
-                        <form>
-                            <input type="checkbox" name "done">
-                        </form>
+                    <!--<div class="col-md-1 center">
+                        <!--<form>
+                            <!--<input type="checkbox" name "done">
+                        <!--</form>
                     </div>
                     <!-- task name -->
-                    <div class="col-md-8">
+                    <!--<div class="col-md-8">
                         Blabla bla
                     </div>
                     <!-- priority of task -->
-                    <div class="col-md-1">
+                    <!--<div class="col-md-1">
                         1 - High
                     </div>
                     <!-- task due date -->
-                    <div class="col-md-1">
+                    <!--<div class="col-md-1">
                         20.03.2016
                     </div>
                     <!-- delete button -->
-                    <div class="col-md-1 center">
+                    <!--<div class="col-md-1 center">
                         <img src="res/delete.png" alt="Delete item">
                     </div>
-                </div>
+                </div> -->
 
             </div>
 
