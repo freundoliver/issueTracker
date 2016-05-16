@@ -18,9 +18,7 @@
 .no-top-margin {
     padding-top: 0px !important;
 }
-.adsfasdf {
-    margin-top: -1px !important;
-}
+
 .task-list {
     flex: 1;
     overflow: scroll;
@@ -43,6 +41,10 @@
 }
 .title-text {
     margin-left: 9em;
+}
+
+.align-center {
+  line-height: 34px;
 }
 
 /*--------------------------------------*/

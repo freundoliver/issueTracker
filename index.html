@@ -23,101 +23,15 @@
     <!-- include bootstrap main javascript -->
     <script src="js/bootstrap.min.js"></script>
 
+    <!-- base UI js -->
+    <script src="js/ui_actions.js"></script>
 
-    <script>
-        // -- define datepicker
-        $(function() {
-            $("#datepicker").datepicker();
-        });
+    <!-- storage js -->
+    <script src="js/storage.js"></script>
 
-        // -- define slide toggle animation for  input fields -
-        function toggleInputFields() {
+    <!--scripts for issue actions-->
+    <script src="js/issue_handling.js"></script>
 
-            var wasToggled;
-
-            if ($("#inputFields").is(":hidden")) {
-                wasToggled = true;
-            } else {
-                wasToggled = false;
-            }
-
-            // toggle the div
-            $("#inputFields").slideToggle();
-
-            //change the arrow
-            if (wasToggled) {
-                // was toggled before and is now not toggled anymore -> show toggle button
-                $(".glyphicon-menu-down").replaceWith('<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>');
-            } else {
-                // was not toggled before and is now toggled -> show expand button
-                $(".glyphicon-menu-up").replaceWith('<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>');
-            }
-        };
-
-        // - function for mobile: collapse when nav menu shown
-        function mobileToggleContentBoxes() {
-
-          var menuOpen;
-          var inputFieldsVisible;
-          var issueListVisible;
-
-          // determine visibility of menu
-          // visiblity is gathered before action, so its always the old state
-          if ($("#navLinkList").is(":hidden")) {
-              menuOpen = false;
-          } else {
-              menuOpen = true;
-          }
-
-          // determine state of input fields
-          if ($("#inputFields").is(":hidden")) {
-              inputFieldsVisible = false;
-          } else {
-              inputFieldsVisible = true;
-          }
-
-          //Determine state of isse list
-          if ($("#issueList").is(":hidden")) {
-              issueListVisible = false;
-          } else {
-              issueListVisible = true;
-          }
-
-          // -- toggle inputFields --
-          var wasToggled;
-          //if menu is open now, it will be collapsed. this means that the input fields must be extended aswell
-          if (menuOpen == true && inputFieldsVisible == false) {
-            $("#inputFields").toggle();
-            wasToggled = true;
-          }
-          //if menu is closed now, it will be extended. this means that the input fields must be collapsed
-          if (menuOpen == false && inputFieldsVisible == true){
-            $("#inputFields").toggle();
-            wasToggled = false;
-          }
-
-          // change the arrow of the input fields
-          if (wasToggled) {
-              // was toggled before and is now not toggled anymore -> show toggle button
-              $(".glyphicon-menu-down").replaceWith('<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>');
-          } else {
-              // was not toggled before and is now toggled -> show expand button
-              $(".glyphicon-menu-up").replaceWith('<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>');
-          }
-
-          // -- toggle Issue list --
-          //if menu is open now, it will be collapsed. this means that the task list must be extended aswell
-          if (menuOpen == true && issueListVisible == false) {
-            $("#issueList").toggle();
-          }
-          //if menu is closed now, it will be extended. this means that the task list must be collapsed
-          if (menuOpen == false && issueListVisible == true){
-            $("#issueList").toggle();
-          }
-
-        };
-
-    </script>
 
 </head>
 
@@ -161,6 +75,25 @@
             <!-- /.container-fluid -->
         </nav>
 
+        <!-- project switcher -->
+        <div class="panel panel-default">
+            <div class="panel-heading task-insert-header">
+
+                <div class="row">
+                    <div class="col-md-1 align-center">
+                        <b> Project</b>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="InputProjectName" placeholder="enter Project ID">
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-default" onclick="localStoreProjectID();">Submit Project</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
         <!-- input form -->
         <div class="panel panel-default">
             <div class="panel-heading task-insert-header" onclick="toggleInputFields();">
@@ -188,7 +121,7 @@
                             <div class="col-md-8">
                                 <div class="form-group row">
                                     <label for="InputTaskName">Task name</label>
-                                    <input type="text" class="form-control" id="InputTaskName" placeholder="enter your task">
+                                    <input type="text" class="form-control" id="inputTaskName" placeholder="enter your task">
                                 </div>
                             </div>
                         </div>
@@ -199,9 +132,9 @@
 
                                 <div class="col-md-2">
                                     <label for="InputPriority">Priority</label>
-                                    <select class="form-control" id="InputPriority">
+                                    <select class="form-control" id="inputPriority">
                                         <option>1 - High</option>
-                                        <option>2 - Medium</option>
+                                        <option>2 - Med.</option>
                                         <option>3 - Low</option>
                                     </select>
                                 </div>
@@ -216,7 +149,7 @@
                         <div class="col-md-12">
                             <div class="col-md-1">
                                 <div class="form-group row">
-                                    <button type="submit" class="btn btn-default">Submit</button>
+                                    <button type="button" class="btn btn-default" onclick="enterNewTask()">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -259,33 +192,33 @@
         <div class="panel panel-default task-list" id="issueList">
 
             <!-- task content -->
-            <div class="panel-body no-top-margin">
+            <div class="panel-body no-top-margin" id="issueListContent">
 
-                <!-- one task entry keep this one!!!-->
-                <div class="row todo-list-element">
-                    <!-- input checkbox: task done? -->
-                    <div class="col-md-1 center">
-                        <form>
-                            <input type="checkbox" name "done">
-                        </form>
+                <!-- example of task-->
+                <!-- <div class="row todo-list-element"> -->
+                <!-- input checkbox: task done? -->
+                <!--<div class="col-md-1 center">
+                        <!--<form>
+                            <!--<input type="checkbox" name "done">
+                        <!--</form>
                     </div>
                     <!-- task name -->
-                    <div class="col-md-8">
+                <!--<div class="col-md-8">
                         Blabla bla
                     </div>
                     <!-- priority of task -->
-                    <div class="col-md-1">
+                <!--<div class="col-md-1">
                         1 - High
                     </div>
                     <!-- task due date -->
-                    <div class="col-md-1">
+                <!--<div class="col-md-1">
                         20.03.2016
                     </div>
                     <!-- delete button -->
-                    <div class="col-md-1 center">
+                <!--<div class="col-md-1 center">
                         <img src="res/delete.png" alt="Delete item">
                     </div>
-                </div>
+                </div> -->
 
             </div>
 
