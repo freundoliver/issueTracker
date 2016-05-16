@@ -24,277 +24,13 @@
     <script src="js/bootstrap.min.js"></script>
 
     <!-- base UI js -->
-    <script type="text/javascript">
-        // -- define datepicker
-        $(function() {
-            $("#datepicker").datepicker();
-        });
-
-        // -- define slide toggle animation for  input fields -
-        function toggleInputFields() {
-
-            var wasToggled;
-
-            if ($("#inputFields").is(":hidden")) {
-                wasToggled = true;
-            } else {
-                wasToggled = false;
-            }
-
-            // toggle the div
-            $("#inputFields").slideToggle();
-
-            //change the arrow
-            if (wasToggled) {
-                // was toggled before and is now not toggled anymore -> show toggle button
-                $(".glyphicon-menu-down").replaceWith('<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>');
-            } else {
-                // was not toggled before and is now toggled -> show expand button
-                $(".glyphicon-menu-up").replaceWith('<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>');
-            }
-        };
-
-        // - function for mobile: collapse when nav menu shown
-        function mobileToggleContentBoxes() {
-
-          var menuOpen;
-          var inputFieldsVisible;
-          var issueListVisible;
-
-          // determine visibility of menu
-          // visiblity is gathered before action, so its always the old state
-          if ($("#navLinkList").is(":hidden")) {
-              menuOpen = false;
-          } else {
-              menuOpen = true;
-          }
-
-          // determine state of input fields
-          if ($("#inputFields").is(":hidden")) {
-              inputFieldsVisible = false;
-          } else {
-              inputFieldsVisible = true;
-          }
-
-          //Determine state of isse list
-          if ($("#issueList").is(":hidden")) {
-              issueListVisible = false;
-          } else {
-              issueListVisible = true;
-          }
-
-          // -- toggle inputFields --
-          var wasToggled;
-          //if menu is open now, it will be collapsed. this means that the input fields must be extended aswell
-          if (menuOpen == true && inputFieldsVisible == false) {
-            $("#inputFields").toggle();
-            wasToggled = true;
-          }
-          //if menu is closed now, it will be extended. this means that the input fields must be collapsed
-          if (menuOpen == false && inputFieldsVisible == true){
-            $("#inputFields").toggle();
-            wasToggled = false;
-          }
-
-          // change the arrow of the input fields
-          if (wasToggled) {
-              // was toggled before and is now not toggled anymore -> show toggle button
-              $(".glyphicon-menu-down").replaceWith('<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>');
-          } else {
-              // was not toggled before and is now toggled -> show expand button
-              $(".glyphicon-menu-up").replaceWith('<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>');
-          }
-
-          // -- toggle Issue list --
-          //if menu is open now, it will be collapsed. this means that the task list must be extended aswell
-          if (menuOpen == true && issueListVisible == false) {
-            $("#issueList").toggle();
-          }
-          //if menu is closed now, it will be extended. this means that the task list must be collapsed
-          if (menuOpen == false && issueListVisible == true){
-            $("#issueList").toggle();
-          }
-
-        };
-
-    </script>
+    <script src="js/ui_actions.js"></script>
 
     <!-- storage js -->
-    <script type="text/javascript">
-
-      //if the website is loaded: read localStorage
-      $( document ).ready(function() {
-        localGetProjectID();
-
-        localGetTasks();
-      });
-
-      function postNewProjectID() {
-        //this function posts a new project id to the REST
-        //expected results: OK, or Project ID allready there
-        var url="http://zhaw-weng-api.herokuapp.com/api/projects/";
-        var data='{ "title": "random" }';
-
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: data,
-            dataType: "json",
-            success: function(result) {
-                switch (result) {
-                    case true:
-                        processResponse(result);
-                        break;
-                    default:
-                        alert("yay");
-                }
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                alert(xhr.status);
-                alert(thrownError);
-            }
-        })
-
-        //jQuery.getJSON(url,data,success(xhr, ajaxOptions, thrownError));
-
-      }
-
-      /*function success(xhr, ajaxOptions, thrownError){
-        alert(xhr.status);
-        alert(thrownError);
-      } */
-
-      function localStoreProjectID(){
-        //check if there was allready a project id
-        var oldProjectID = localStorage.getItem("projectID");
-
-        // new project id
-        var projectID = $("#InputProjectName").val();
-
-        //if project IDs are different: set new one and clear the old tasks!
-        if (oldProjectID != projectID){
-          localStorage.setItem("projectID", projectID);
-          localStorage.removeItem("taskArray");
-
-          location.reload();
-        }
-
-      }
-
-      function localGetProjectID(){
-        // Retrieve
-        $("#InputProjectName").val(localStorage.getItem("projectID"));
-      }
-
-      function enterNewTask(){
-        //check if projectID is set
-        var projectID = localStorage.getItem("projectID");
-
-        if (projectID != null){
-
-        var taskName = $("#inputTaskName").val();
-        var taskPrio = $("#inputPriority").val();
-        var taskDueDate = $("#datepicker").val();
-        var uuid = guid();
-
-        var taskEntry = '<div class="row todo-list-element" id="'+uuid+'" > <!-- input checkbox: task done? --> <div class="col-md-1 center"> <form> <input type="checkbox" name="done" value="true" empty onclick="completeTask(\''+uuid+'\');"></form></div><!-- task name --><div class="col-md-8">'+taskName+'</div><!-- priority of task --><div class="col-md-1">'+taskPrio+'</div><!-- task due date --><div class="col-md-1">'+taskDueDate+'</div><!-- delete button --><div class="col-md-1 center"><img src="res/delete.png" alt="Delete item" onclick="deleteTask(\''+uuid+'\');"></div></div>';
-
-        localStoreTask(taskEntry, uuid);
-
-        $("#issueListContent").prepend(taskEntry);
-
-        }
-        else {
-          alert ("Plese insert a Project-ID");
-        }
-
-      }
-
-      function localStoreTask(taskEntry, uuid){
-
-          //get task array
-          var taskArray = JSON.parse(localStorage.getItem("taskArray"));
-
-          if (taskArray != null){
-            var taskArrayLength = taskArray.length;
-            //this is the new task ID!
-            taskArray[taskArrayLength] = new Array(2);
-            taskArray[taskArrayLength][0] = uuid;
-            taskArray[taskArrayLength][1] = taskEntry;
-
-          }
-          else{
-            //create new array
-
-            var taskArray = new Array();
-            taskArray[0] = new Array(2);
-            taskArray[0][0] = uuid;
-            taskArray[0][1] = taskEntry;
-
-          }
-
-          //store again
-          localStorage.setItem("taskArray", JSON.stringify(taskArray));
-      }
-
-      function localGetTasks(){
-
-        //get task array
-        var taskArray = JSON.parse(localStorage.getItem("taskArray"));
-
-        jQuery.each(taskArray, function(index,item){
-          if (item != null){
-            $("#issueListContent").prepend(item[1]);
-          }
-        });
-
-      }
-
-      function guid() {
-        function s4() {
-          return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
-        }
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-          s4() + '-' + s4() + s4() + s4();
-      }
-
-    </script>
+    <script src="js/storage.js"></script>
 
     <!--scripts for issue actions-->
-    <script type="text/javascript">
-      function deleteTask(uuid){
-        //delete div with uuid
-        $('#'+uuid).remove();
-
-        //delete from localstorage
-        var taskArray = JSON.parse(localStorage.getItem("taskArray"));
-
-        jQuery.each(taskArray, function(index,item){
-
-          if (item!=null){
-            if (item[0] == uuid){
-              delete taskArray[index];
-            }
-          }
-        });
-
-        //store updated array again
-        localStorage.setItem("taskArray", JSON.stringify(taskArray));
-
-      }
-
-      function completeTask(uuid){
-
-        //get the div by uuid and replace it on the localcache
-        var task = $('#'+uuid)[0].outerHTML;
-
-        alert (task);
-
-      }
-
-    </script>
+    <script src="js/issue_handling.js"></script>
 
 
 </head>
@@ -460,26 +196,26 @@
 
                 <!-- example of task-->
                 <!-- <div class="row todo-list-element"> -->
-                    <!-- input checkbox: task done? -->
-                    <!--<div class="col-md-1 center">
+                <!-- input checkbox: task done? -->
+                <!--<div class="col-md-1 center">
                         <!--<form>
                             <!--<input type="checkbox" name "done">
                         <!--</form>
                     </div>
                     <!-- task name -->
-                    <!--<div class="col-md-8">
+                <!--<div class="col-md-8">
                         Blabla bla
                     </div>
                     <!-- priority of task -->
-                    <!--<div class="col-md-1">
+                <!--<div class="col-md-1">
                         1 - High
                     </div>
                     <!-- task due date -->
-                    <!--<div class="col-md-1">
+                <!--<div class="col-md-1">
                         20.03.2016
                     </div>
                     <!-- delete button -->
-                    <!--<div class="col-md-1 center">
+                <!--<div class="col-md-1 center">
                         <img src="res/delete.png" alt="Delete item">
                     </div>
                 </div> -->
